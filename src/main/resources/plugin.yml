@@ -1,0 +1,16 @@
+name: Custom-Items
+version: '${project.version}'
+main: me.wiviw.customitems.CustomItems
+api-version: 1.18
+authors: [ WiViW ]
+description: Revitalization of Custominventories.
+website: https://github.com/wiviw5
+commands:
+  cirename:
+    description: Renames your Held Item
+  cirelore:
+    description: Changes lore on your Held Item
+  cireturntext:
+    description: Returns Text to you
+  cibuffer:
+    description: Commands related to the buffer.
