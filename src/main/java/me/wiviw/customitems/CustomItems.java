@@ -1,24 +1,17 @@
 package me.wiviw.customitems;
 
-import me.wiviw.customitems.commands.CommandBuffer;
-import me.wiviw.customitems.commands.CommandRename;
-import me.wiviw.customitems.commands.CommandReturnText;
-import me.wiviw.customitems.databaseutils.Database;
-import me.wiviw.customitems.databaseutils.SQLite;
+import me.wiviw.customitems.commands.BufferCommand;
 import org.bukkit.plugin.java.JavaPlugin;
+
+import static me.wiviw.customitems.enums.GeneralCommandEnums.*;
 
 public final class CustomItems extends JavaPlugin {
 
-    public static String pluginname = "customitems";
-    private Database bufferDB;
-    private Database invDB;
+    private static CustomItems instance;
 
     @Override
     public void onEnable() {
-        this.bufferDB = new SQLite(this);
-        this.bufferDB.load("bufferDB");
-        this.invDB = new SQLite(this);
-        this.invDB.load("invDB");
+        instance = this;
         registerCommands();
     }
 
@@ -28,16 +21,11 @@ public final class CustomItems extends JavaPlugin {
     }
 
     public void registerCommands() {
-        getCommand("cirename").setExecutor(new CommandRename());
-        getCommand("cireturntext").setExecutor(new CommandReturnText());
-        getCommand("cibuffer").setExecutor(new CommandBuffer());
+        getCommand(CMD_BUFFER.getCommandName()).setExecutor(new BufferCommand());
+        getCommand(CMD_BUFFER.getCommandName()).setPermission(CMD_BUFFER.getPermission());
     }
 
-    public Database getBufferDataBase() {
-        return this.bufferDB;
-    }
-
-    public Database getINVDataBase() {
-        return this.invDB;
+    public static CustomItems getInstance() {
+        return instance;
     }
 }
